@@ -15,4 +15,7 @@ urlpatterns = [
     path('category/<str:category>/', views.recipes_by_category, name='recipes_by_category'),
     path('delete/<int:pk>/', views.delete_recipe, name='delete_recipe'),
     path('popular/', views.popular_recipes, name='popular_recipes'),
+
+    # Static Pages
+    path('about/', views.about_view, name='about'),
 ]

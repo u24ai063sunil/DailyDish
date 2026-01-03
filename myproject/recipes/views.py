@@ -230,3 +230,8 @@ def recipes_by_category(request, category):
     }
     
     return render(request, 'recipes_by_category.html', context)
+
+
+# About Page
+def about_view(request):
+    return render(request, 'about.html')

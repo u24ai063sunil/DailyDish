@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+{% block title %}About Us - DailyDish{% endblock %}
+
+{% block content %}
+<div style="max-width: 900px; margin: 0 auto;">
+  
+  <!-- Hero Section -->
+  <div style="text-align: center; margin-bottom: 60px;">
+    <h1 style="font-size: 3.5rem; margin-bottom: 20px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+      About DailyDish
+    </h1>
+    <p style="font-size: 1.3rem; color: var(--text-secondary); line-height: 1.8; max-width: 700px; margin: 0 auto;">
+      Your personal recipe companion for discovering, creating, and sharing delicious meals every day.
+    </p>
+  </div>
+
+  <!-- Mission Section -->
+  <div class="recipe-card" style="margin-bottom: 40px;">
+    <div style="text-align: center; margin-bottom: 30px;">
+      <i class="fas fa-heart" style="font-size: 3rem; color: var(--secondary-color); margin-bottom: 15px;"></i>
+      <h2 style="color: var(--primary-color); margin-bottom: 15px;">Our Mission</h2>
+    </div>
+    <p style="font-size: 1.1rem; line-height: 1.9; color: var(--text-secondary); text-align: center;">
+      At DailyDish, we believe that cooking should be accessible, enjoyable, and inspiring for everyone. 
+      Our mission is to create a vibrant community where home cooks, food enthusiasts, and culinary explorers 
+      can come together to share their passion for great food.
+    </p>
+  </div>
+
+  <!-- Features Grid -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 50px;">
+    
+    <div class="recipe-card" style="text-align: center;">
+      <i class="fas fa-book-open" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px;"></i>
+      <h3 style="color: var(--primary-color); margin-bottom: 15px;">Discover Recipes</h3>
+      <p style="color: var(--text-secondary); line-height: 1.7;">
+        Explore thousands of recipes from our community, from quick weeknight dinners to elaborate weekend feasts.
+      </p>
+    </div>
+
+    <div class="recipe-card" style="text-align: center;">
+      <i class="fas fa-users" style="font-size: 2.5rem; color: var(--secondary-color); margin-bottom: 20px;"></i>
+      <h3 style="color: var(--primary-color); margin-bottom: 15px;">Join Community</h3>
+      <p style="color: var(--text-secondary); line-height: 1.7;">
+        Connect with fellow food lovers, share your culinary creations, and inspire others with your recipes.
+      </p>
+    </div>
+
+    <div class="recipe-card" style="text-align: center;">
+      <i class="fas fa-utensils" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 20px;"></i>
+      <h3 style="color: var(--primary-color); margin-bottom: 15px;">Cook with Ease</h3>
+      <p style="color: var(--text-secondary); line-height: 1.7;">
+        Easy-to-follow instructions, detailed ingredient lists, and helpful filters to find exactly what you need.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Story Section -->
+  <div class="recipe-card" style="margin-bottom: 40px;">
+    <h2 style="color: var(--primary-color); margin-bottom: 25px; text-align: center;">Our Story</h2>
+    <div style="display: grid; gap: 25px;">
+      <p style="font-size: 1.05rem; line-height: 1.9; color: var(--text-secondary);">
+        DailyDish was born from a simple idea: everyone should have access to a collection of recipes that inspire 
+        them to cook more often. We noticed that people were keeping recipes scattered across bookmarks, screenshots, 
+        and handwritten notes, making it hard to find that perfect dish when they needed it.
+      </p>
+      <p style="font-size: 1.05rem; line-height: 1.9; color: var(--text-secondary);">
+        We created DailyDish as a platform where you can store all your favorite recipes in one beautiful, 
+        organized space. But we didn't stop there – we built a community where passionate cooks can share 
+        their creations, discover new flavors, and connect over their love of food.
+      </p>
+      <p style="font-size: 1.05rem; line-height: 1.9; color: var(--text-secondary);">
+        Today, DailyDish is home to a growing community of home cooks who believe that good food brings 
+        people together. Whether you're a beginner learning the basics or an experienced chef perfecting 
+        your craft, you'll find a welcoming space here.
+      </p>
+    </div>
+  </div>
+
+  <!-- Values Section -->
+  <div class="recipe-card" style="margin-bottom: 40px;">
+    <h2 style="color: var(--primary-color); margin-bottom: 30px; text-align: center;">What We Value</h2>
+    <div style="display: grid; gap: 20px;">
+      
+      <div style="display: flex; gap: 20px; align-items: start; padding: 20px; background: rgba(0, 255, 200, 0.05); border-radius: 12px; border-left: 4px solid var(--primary-color);">
+        <i class="fas fa-lightbulb" style="font-size: 1.8rem; color: var(--primary-color); margin-top: 5px;"></i>
+        <div>
+          <h4 style="color: var(--text-primary); margin-bottom: 10px; font-size: 1.2rem;">Simplicity</h4>
+          <p style="color: var(--text-secondary); line-height: 1.7;">
+            Cooking should be simple and enjoyable. We design every feature to be intuitive and easy to use.
+          </p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 20px; align-items: start; padding: 20px; background: rgba(255, 107, 157, 0.05); border-radius: 12px; border-left: 4px solid var(--secondary-color);">
+        <i class="fas fa-hands-helping" style="font-size: 1.8rem; color: var(--secondary-color); margin-top: 5px;"></i>
+        <div>
+          <h4 style="color: var(--text-primary); margin-bottom: 10px; font-size: 1.2rem;">Community</h4>
+          <p style="color: var(--text-secondary); line-height: 1.7;">
+            We believe in the power of sharing. Every recipe shared makes our community richer and more diverse.
+          </p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 20px; align-items: start; padding: 20px; background: rgba(255, 217, 61, 0.05); border-radius: 12px; border-left: 4px solid var(--accent-color);">
+        <i class="fas fa-leaf" style="font-size: 1.8rem; color: var(--accent-color); margin-top: 5px;"></i>
+        <div>
+          <h4 style="color: var(--text-primary); margin-bottom: 10px; font-size: 1.2rem;">Inclusivity</h4>
+          <p style="color: var(--text-secondary); line-height: 1.7;">
+            From vegan to traditional, easy to complex – we celebrate all types of recipes and cooking styles.
+          </p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 20px; align-items: start; padding: 20px; background: rgba(74, 222, 128, 0.05); border-radius: 12px; border-left: 4px solid var(--success);">
+        <i class="fas fa-sparkles" style="font-size: 1.8rem; color: var(--success); margin-top: 5px;"></i>
+        <div>
+          <h4 style="color: var(--text-primary); margin-bottom: 10px; font-size: 1.2rem;">Innovation</h4>
+          <p style="color: var(--text-secondary); line-height: 1.7;">
+            We're constantly improving and adding features based on what our community needs and wants.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Stats Section -->
+  <div class="recipe-card" style="margin-bottom: 40px; background: linear-gradient(135deg, rgba(0, 255, 200, 0.1), rgba(255, 107, 157, 0.1));">
+    <h2 style="color: var(--primary-color); margin-bottom: 30px; text-align: center;">DailyDish by the Numbers</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 30px; text-align: center;">
+      
+      <div>
+        <div style="font-size: 3rem; font-weight: 900; color: var(--primary-color); margin-bottom: 10px;">1000+</div>
+        <div style="color: var(--text-muted); font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">Recipes</div>
+      </div>
+
+      <div>
+        <div style="font-size: 3rem; font-weight: 900; color: var(--secondary-color); margin-bottom: 10px;">500+</div>
+        <div style="color: var(--text-muted); font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">Users</div>
+      </div>
+
+      <div>
+        <div style="font-size: 3rem; font-weight: 900; color: var(--accent-color); margin-bottom: 10px;">50+</div>
+        <div style="color: var(--text-muted); font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">Cuisines</div>
+      </div>
+
+      <div>
+        <div style="font-size: 3rem; font-weight: 900; color: var(--success); margin-bottom: 10px;">24/7</div>
+        <div style="color: var(--text-muted); font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">Available</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Call to Action -->
+  <div class="recipe-card" style="text-align: center; background: linear-gradient(135deg, rgba(0, 255, 200, 0.15), rgba(0, 230, 179, 0.15)); border: 2px solid var(--primary-color);">
+    <h2 style="color: var(--primary-color); margin-bottom: 20px;">Join Our Community Today!</h2>
+    <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 30px; line-height: 1.8;">
+      Whether you're here to discover new recipes or share your culinary masterpieces, 
+      we're excited to have you as part of the DailyDish family.
+    </p>
+    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+      {% if user.is_authenticated %}
+        <a href="{% url 'add_recipe' %}" style="display: inline-block; padding: 16px 40px; background: linear-gradient(135deg, var(--primary-color), var(--primary-hover)); color: #000; border-radius: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; box-shadow: 0 4px 15px rgba(0, 255, 200, 0.3); transition: all 0.3s ease;">
+          ➕ Share Your Recipe
+        </a>
+        <a href="{% url 'recipe_list' %}" style="display: inline-block; padding: 16px 40px; background: rgba(255, 255, 255, 0.05); color: var(--primary-color); border: 2px solid var(--primary-color); border-radius: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; transition: all 0.3s ease;">
+          📖 Browse Recipes
+        </a>
+      {% else %}
+        <a href="{% url 'register' %}" style="display: inline-block; padding: 16px 40px; background: linear-gradient(135deg, var(--primary-color), var(--primary-hover)); color: #000; border-radius: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; box-shadow: 0 4px 15px rgba(0, 255, 200, 0.3); transition: all 0.3s ease;">
+          ✨ Sign Up Free
+        </a>
+        <a href="{% url 'popular_recipes' %}" style="display: inline-block; padding: 16px 40px; background: rgba(255, 255, 255, 0.05); color: var(--primary-color); border: 2px solid var(--primary-color); border-radius: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; transition: all 0.3s ease;">
+          ✨ Explore Recipes
+        </a>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div style="text-align: center; margin-top: 60px; padding: 40px 20px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+    <h3 style="color: var(--primary-color); margin-bottom: 20px;">Get in Touch</h3>
+    <p style="color: var(--text-secondary); margin-bottom: 25px; font-size: 1.05rem;">
+      Have questions, suggestions, or just want to say hello? We'd love to hear from you!
+    </p>
+    <div style="display: flex; gap: 20px; justify-content: center; align-items: center; flex-wrap: wrap;">
+      <a href="mailto:suniljaat2911@gmail.com" style="color: var(--primary-color); font-size: 1.1rem; display: flex; align-items: center; gap: 10px;">
+        <i class="fas fa-envelope"></i> hello@dailydish.com
+      </a>
+      <span style="color: var(--text-muted);">•</span>
+      <div style="display: flex; gap: 15px;">
+        <a href="#" style="color: var(--text-secondary); font-size: 1.5rem; transition: all 0.3s ease;" aria-label="Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="#" style="color: var(--text-secondary); font-size: 1.5rem; transition: all 0.3s ease;" aria-label="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="#" style="color: var(--text-secondary); font-size: 1.5rem; transition: all 0.3s ease;" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  a:hover {
+    transform: translateY(-2px);
+  }
+</style>
+{% endblock %}
