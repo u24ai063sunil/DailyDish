@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Add Recipe - DailyDish{% endblock %}
+
+{% block content %}
+<h1>Add a New Recipe</h1>
+
+<form method="post">
+  {% csrf_token %}
+  
+  <label for="title">Title:</label>
+  <input type="text" name="title" id="title" placeholder="e.g. Taco Bell" required>
+
+  <label for="category">Category:</label>
+  <select name="category" id="category" required>
+    <option value="">Select Category</option>
+    <option value="Breakfast">Breakfast</option>
+    <option value="Lunch">Lunch</option>
+    <option value="Dinner">Dinner</option>
+    <option value="Dessert">Dessert</option>
+    <option value="Snacks">Snacks</option>
+    <option value="Drinks">Drinks</option>
+  </select>
+
+  <label for="ingredients">Ingredients:</label>
+  <textarea name="ingredients" id="ingredients" rows="5" placeholder="List ingredients here..." required></textarea>
+
+  <label for="instructions">Instructions:</label>
+  <textarea name="instructions" id="instructions" rows="5" placeholder="Write step-by-step instructions..." required></textarea>
+
+  <button type="submit">Submit Recipe</button>
+</form>
+
+<a href="{% url 'recipe_list' %}" style="display: inline-block; margin-top: 20px; color: var(--primary-color); text-decoration: none; transition: 0.3s;">← Back to All Recipes</a>
+
+{% endblock %}

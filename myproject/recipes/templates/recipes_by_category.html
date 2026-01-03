@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}{{ category }} recipes_by_category-DailyDish{% endblock %}
+{% block content %}
+
+<h1>{{ category }} Recipes</h1>
+
+{% if recipes %}
+  {% for recipe in recipes %}
+    <div class="recipe-card">
+      <h2>{{ recipe.title }}</h2>
+      <p><strong>Ingredients:</strong> {{ recipe.ingredients }}</p>
+      <p><strong>Instructions:</strong> {{ recipe.instructions }}</p>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>No {{ category }} recipes available right now.</p>
+{% endif %}
+
+<a href="{% url 'recipe_list' %}" style="display: inline-block; margin-top: 20px; color: var(--primary-color); text-decoration: none; transition: 0.3s;">← Back to All Recipes</a>
+
+
+{% endblock %}

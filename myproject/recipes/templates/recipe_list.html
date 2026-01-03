@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}All Recipes -DailyDish{% endblock %}
+{% block content %}
+
+<h1>All Recipes</h1>
+
+{% if recipes %}
+  {% for recipe in recipes %}
+  <div class="recipe-card">
+    <h2>{{ recipe.title }}</h2>
+    <p><strong>Category:</strong> {{ recipe.category }}</p>
+    <p><strong>Ingredients:</strong> {{ recipe.ingredients }}</p>
+    <p><strong>Instructions:</strong> {{ recipe.instructions }}</p>
+    <form method="post" action="{% url 'delete_recipe' recipe.pk %}" style="margin-top:10px;">
+      {% csrf_token %}
+      <button type="submit" style="background:#ff4d4d; color:white; border:none; padding:8px 12px; border-radius:6px; cursor:pointer;">
+        Delete
+      </button>
+    </form>
+  </div>
+  {% endfor %}
+{% else %}
+  <p>No recipes found yet.    <a href="{% url 'add_recipe' %}" style="display: inline-block; margin-top: 20px; color: var(--primary-color); text-decoration: none; transition: 0.3s;">Add one now!</a>
+  </p>
+{% endif %}
+
+{% endblock %}
