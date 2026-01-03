@@ -121,3 +121,21 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Add these to your settings.py
+
+# Login/Logout redirects
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'recipe_list'
+LOGOUT_REDIRECT_URL = 'login'
+
+# Media files (for profile pictures)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Messages framework (should already be in INSTALLED_APPS)
+# If not, add 'django.contrib.messages' to INSTALLED_APPS
+
+# Make sure these are in MIDDLEWARE
+# 'django.contrib.sessions.middleware.SessionMiddleware',
+# 'django.contrib.auth.middleware.AuthenticationMiddleware',
+# 'django.contrib.messages.middleware.MessageMiddleware',

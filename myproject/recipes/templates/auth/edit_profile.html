@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Edit Profile - DailyDish{% endblock %}
+
+{% block content %}
+<div style="max-width: 700px; margin: 0 auto;">
+  <h1>Edit Profile</h1>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div style="padding: 15px; border-radius: 8px; margin-bottom: 20px; background: rgba(74, 222, 128, 0.1); border: 1px solid #4ade80;">
+        <p style="margin: 0; color: #4ade80;">{{ message }}</p>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="recipe-card">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      
+      <h3 style="color: var(--primary-color); margin-bottom: 20px;">Account Information</h3>
+      
+      <label for="id_username">Username</label>
+      {{ user_form.username }}
+      
+      <label for="id_email">Email</label>
+      {{ user_form.email }}
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+        <div>
+          <label for="id_first_name">First Name</label>
+          {{ user_form.first_name }}
+        </div>
+        <div>
+          <label for="id_last_name">Last Name</label>
+          {{ user_form.last_name }}
+        </div>
+      </div>
+
+      <hr style="border: none; height: 1px; background: rgba(255, 255, 255, 0.1); margin: 30px 0;">
+
+      <h3 style="color: var(--primary-color); margin-bottom: 20px;">Profile Details</h3>
+
+      <label for="id_profile_picture">Profile Picture</label>
+      <input type="file" name="profile_picture" id="id_profile_picture" accept="image/*" style="padding: 10px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); cursor: pointer;">
+      
+      <label for="id_location">Location</label>
+      {{ profile_form.location }}
+
+      <label for="id_favorite_cuisine">Favorite Cuisine</label>
+      {{ profile_form.favorite_cuisine }}
+
+      <label for="id_bio">Bio</label>
+      {{ profile_form.bio }}
+
+      <div style="display: flex; gap: 15px; margin-top: 30px;">
+        <button type="submit" style="flex: 1;">💾 Save Changes</button>
+        <a href="{% url 'profile' %}" style="flex: 1; display: flex; align-items: center; justify-content: center; background: #555; color: white; text-decoration: none; padding: 14px; border-radius: 10px; font-weight: 700; text-transform: uppercase;">
+          Cancel
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

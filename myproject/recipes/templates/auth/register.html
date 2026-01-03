@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}Register - DailyDish{% endblock %}
+
+{% block content %}
+<div style="max-width: 500px; margin: 50px auto;">
+  <div class="recipe-card" style="text-align: center;">
+    <h1 style="margin-bottom: 10px;">Create Account</h1>
+    <p style="color: var(--text-muted); margin-bottom: 30px;">Join DailyDish and start sharing your recipes!</p>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div style="padding: 15px; border-radius: 8px; margin-bottom: 20px; background: {% if message.tags == 'error' %}rgba(248, 113, 113, 0.1); border: 1px solid #f87171;{% else %}rgba(74, 222, 128, 0.1); border: 1px solid #4ade80;{% endif %}">
+          <p style="margin: 0; color: {% if message.tags == 'error' %}#f87171{% else %}#4ade80{% endif %};">{{ message }}</p>
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="post" style="text-align: left;">
+      {% csrf_token %}
+      
+      <label for="id_username">Username *</label>
+      {{ form.username }}
+      {% if form.username.errors %}
+        <p style="color: #f87171; font-size: 0.9rem; margin-top: 5px;">{{ form.username.errors.0 }}</p>
+      {% endif %}
+
+      <label for="id_email">Email *</label>
+      {{ form.email }}
+      {% if form.email.errors %}
+        <p style="color: #f87171; font-size: 0.9rem; margin-top: 5px;">{{ form.email.errors.0 }}</p>
+      {% endif %}
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+        <div>
+          <label for="id_first_name">First Name</label>
+          {{ form.first_name }}
+        </div>
+        <div>
+          <label for="id_last_name">Last Name</label>
+          {{ form.last_name }}
+        </div>
+      </div>
+
+      <label for="id_password1">Password *</label>
+      {{ form.password1 }}
+      {% if form.password1.errors %}
+        <p style="color: #f87171; font-size: 0.9rem; margin-top: 5px;">{{ form.password1.errors.0 }}</p>
+      {% endif %}
+      <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 5px;">
+        Password must be at least 8 characters and not entirely numeric.
+      </p>
+
+      <label for="id_password2">Confirm Password *</label>
+      {{ form.password2 }}
+      {% if form.password2.errors %}
+        <p style="color: #f87171; font-size: 0.9rem; margin-top: 5px;">{{ form.password2.errors.0 }}</p>
+      {% endif %}
+
+      <button type="submit" style="margin-top: 25px;">Create Account</button>
+    </form>
+
+    <p style="margin-top: 25px; color: var(--text-muted);">
+      Already have an account? 
+      <a href="{% url 'login' %}" style="color: var(--primary-color); font-weight: 600;">Login here</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

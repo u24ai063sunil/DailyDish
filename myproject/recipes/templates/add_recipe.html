@@ -7,25 +7,73 @@
 <form method="post">
   {% csrf_token %}
   
-  <label for="title">Title:</label>
-  <input type="text" name="title" id="title" placeholder="e.g. Taco Bell" required>
+  <label for="title">Recipe Title: *</label>
+  <input type="text" name="title" id="title" placeholder="e.g. Butter Chicken" required>
 
-  <label for="category">Category:</label>
-  <select name="category" id="category" required>
-    <option value="">Select Category</option>
-    <option value="Breakfast">Breakfast</option>
-    <option value="Lunch">Lunch</option>
-    <option value="Dinner">Dinner</option>
-    <option value="Dessert">Dessert</option>
-    <option value="Snacks">Snacks</option>
-    <option value="Drinks">Drinks</option>
-  </select>
+  <label for="description">Description:</label>
+  <textarea name="description" id="description" rows="2" placeholder="Brief description of the recipe..."></textarea>
 
-  <label for="ingredients">Ingredients:</label>
-  <textarea name="ingredients" id="ingredients" rows="5" placeholder="List ingredients here..." required></textarea>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+    <div>
+      <label for="category">Category: *</label>
+      <select name="category" id="category" required>
+        <option value="">Select Category</option>
+        <option value="Breakfast">Breakfast</option>
+        <option value="Lunch">Lunch</option>
+        <option value="Dinner">Dinner</option>
+        <option value="Dessert">Dessert</option>
+        <option value="Snacks">Snacks</option>
+        <option value="Drinks">Drinks</option>
+      </select>
+    </div>
 
-  <label for="instructions">Instructions:</label>
-  <textarea name="instructions" id="instructions" rows="5" placeholder="Write step-by-step instructions..." required></textarea>
+    <div>
+      <label for="difficulty">Difficulty: *</label>
+      <select name="difficulty" id="difficulty" required>
+        <option value="Easy">Easy</option>
+        <option value="Medium" selected>Medium</option>
+        <option value="Hard">Hard</option>
+      </select>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+    <div>
+      <label for="prep_time">Prep Time (mins): *</label>
+      <input type="number" name="prep_time" id="prep_time" min="0" placeholder="15" required>
+    </div>
+
+    <div>
+      <label for="cook_time">Cook Time (mins): *</label>
+      <input type="number" name="cook_time" id="cook_time" min="0" placeholder="30" required>
+    </div>
+
+    <div>
+      <label for="servings">Servings: *</label>
+      <input type="number" name="servings" id="servings" min="1" placeholder="4" value="4" required>
+    </div>
+  </div>
+
+  <label for="cuisine">Cuisine:</label>
+  <input type="text" name="cuisine" id="cuisine" placeholder="e.g. Indian, Italian, Chinese">
+
+  <div style="display: flex; gap: 30px; margin: 20px 0;">
+    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+      <input type="checkbox" name="is_vegetarian" style="width: auto;">
+      <span>Vegetarian</span>
+    </label>
+
+    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+      <input type="checkbox" name="is_vegan" style="width: auto;">
+      <span>Vegan</span>
+    </label>
+  </div>
+
+  <label for="ingredients">Ingredients: *</label>
+  <textarea name="ingredients" id="ingredients" rows="8" placeholder="List ingredients (one per line or separated by commas)..." required></textarea>
+
+  <label for="instructions">Instructions: *</label>
+  <textarea name="instructions" id="instructions" rows="10" placeholder="Write step-by-step instructions..." required></textarea>
 
   <button type="submit">Submit Recipe</button>
 </form>

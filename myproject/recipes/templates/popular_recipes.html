@@ -2,15 +2,76 @@
 {% block title %}Popular Recipes - DailyDish{% endblock %}
 
 {% block content %}
-<h1>Popular Recipes</h1>
+<div style="text-align: center; margin-bottom: 40px;">
+  <h1>✨ Popular Recipes</h1>
+  <p style="color: var(--text-secondary); font-size: 1.2rem; margin-top: 10px;">Discover our most loved and trending recipes!</p>
+</div>
 
-{% for recipe in recipes %}
+{% if recipes %}
+  {% for recipe in recipes %}
   <div class="recipe-card">
-    <h2>{{ recipe.title }}</h2>
-    <p><strong>Category:</strong> {{ recipe.category }}</p>
-    <p><strong>Ingredients:</strong> {{ recipe.ingredients }}</p>
-    <p><strong>Instructions:</strong> {{ recipe.instructions }}</p>
+    <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 15px; margin-bottom: 15px;">
+      <h2 style="margin: 0; flex: 1;">{{ recipe.title }}</h2>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        {% if recipe.is_vegetarian %}
+          <span class="badge badge-veg">🌱 Vegetarian</span>
+        {% endif %}
+        {% if recipe.is_vegan %}
+          <span class="badge badge-vegan">🌿 Vegan</span>
+        {% endif %}
+      </div>
+    </div>
+    
+    {% if recipe.description %}
+      <p style="font-style: italic; margin-bottom: 20px; font-size: 1.05rem;">{{ recipe.description }}</p>
+    {% endif %}
+
+    <div style="display: flex; flex-wrap: wrap; gap: 25px; margin: 20px 0; padding: 20px; background: rgba(0, 255, 200, 0.05); border-radius: 12px; border: 1px solid rgba(0, 255, 200, 0.1);">
+      <div><strong>Category:</strong> <span style="color: var(--text-secondary);">{{ recipe.category }}</span></div>
+      <div><strong>Difficulty:</strong> 
+        <span class="badge badge-{% if recipe.difficulty == 'Easy' %}easy{% elif recipe.difficulty == 'Medium' %}medium{% else %}hard{% endif %}">
+          {{ recipe.difficulty }}
+        </span>
+      </div>
+      {% if recipe.cuisine %}
+        <div><strong>Cuisine:</strong> <span style="color: var(--text-secondary);">{{ recipe.cuisine }}</span></div>
+      {% endif %}
+      <div><strong>⏰ Total Time:</strong> <span style="color: var(--primary-color); font-weight: 700;">{{ recipe.total_time }} mins</span></div>
+      <div><strong>👥 Servings:</strong> <span style="color: var(--text-secondary);">{{ recipe.servings }}</span></div>
+    </div>
+
+    <div style="margin-bottom: 25px;">
+      <h3 style="color: var(--primary-color); font-size: 1.3rem; margin-bottom: 12px;">📋 Ingredients</h3>
+      <p style="white-space: pre-line; color: var(--text-secondary); line-height: 1.8; padding-left: 15px;">{{ recipe.ingredients }}</p>
+    </div>
+    
+    <div style="margin-bottom: 25px;">
+      <h3 style="color: var(--primary-color); font-size: 1.3rem; margin-bottom: 12px;">👨‍🍳 Instructions</h3>
+      <p style="white-space: pre-line; color: var(--text-secondary); line-height: 1.8; padding-left: 15px;">{{ recipe.instructions }}</p>
+    </div>
+
+    {% if recipe.author %}
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+        👨‍🍳 Curated by <strong style="color: var(--primary-color);">{{ recipe.author.username }}</strong>
+      </p>
+    {% endif %}
   </div>
-{% endfor %}
+  {% endfor %}
+{% else %}
+  <div class="recipe-card" style="text-align: center; padding: 60px 30px;">
+    <i class="fas fa-star" style="font-size: 4rem; color: var(--text-muted); margin-bottom: 20px; opacity: 0.3;"></i>
+    <h2 style="margin-bottom: 20px;">✨ No popular recipes yet</h2>
+    <p style="font-size: 1.1rem; margin-bottom: 30px;">Check back soon for featured recipes from our community!</p>
+    <a href="{% url 'recipe_list' %}" class="btn" style="width: auto; display: inline-block; padding: 14px 30px;">
+      📖 Browse All Recipes
+    </a>
+  </div>
+{% endif %}
+
+<div style="text-align: center; margin-top: 40px;">
+  <a href="{% url 'recipe_list' %}" class="btn" style="width: auto; display: inline-flex; align-items: center; gap: 10px; padding: 16px 40px; font-size: 1.1rem;">
+    📖 View All Recipes
+  </a>
+</div>
 
 {% endblock %}

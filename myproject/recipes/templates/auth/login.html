@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Login - DailyDish{% endblock %}
+
+{% block content %}
+<div style="max-width: 500px; margin: 50px auto;">
+  <div class="recipe-card" style="text-align: center;">
+    <h1 style="margin-bottom: 10px;">Welcome Back!</h1>
+    <p style="color: var(--text-muted); margin-bottom: 30px;">Login to access your recipes and profile</p>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div style="padding: 15px; border-radius: 8px; margin-bottom: 20px; background: {% if message.tags == 'error' %}rgba(248, 113, 113, 0.1); border: 1px solid #f87171;{% else %}rgba(74, 222, 128, 0.1); border: 1px solid #4ade80;{% endif %}">
+          <p style="margin: 0; color: {% if message.tags == 'error' %}#f87171{% else %}#4ade80{% endif %};">{{ message }}</p>
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="post" style="text-align: left;">
+      {% csrf_token %}
+      
+      <label for="id_username">Username</label>
+      {{ form.username }}
+      {% if form.username.errors %}
+        <p style="color: #f87171; font-size: 0.9rem; margin-top: -15px; margin-bottom: 20px;">{{ form.username.errors.0 }}</p>
+      {% endif %}
+
+      <label for="id_password">Password</label>
+      {{ form.password }}
+      {% if form.password.errors %}
+        <p style="color: #f87171; font-size: 0.9rem; margin-top: -15px; margin-bottom: 20px;">{{ form.password.errors.0 }}</p>
+      {% endif %}
+
+      <div style="text-align: right; margin-bottom: 20px;">
+        <a href="#" style="color: var(--primary-color); font-size: 0.9rem; font-weight: 500;">Forgot password?</a>
+      </div>
+
+      <button type="submit" style="margin-top: 10px;">🔓 Login</button>
+    </form>
+
+    <div style="margin-top: 30px; padding-top: 25px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+      <p style="color: var(--text-muted); margin-bottom: 15px;">
+        Don't have an account?
+      </p>
+      <a href="{% url 'register' %}" style="display: inline-block; padding: 12px 30px; background: rgba(0, 255, 200, 0.1); color: var(--primary-color); border: 2px solid var(--primary-color); border-radius: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease;">
+        ✨ Create Account
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}
