@@ -4,7 +4,7 @@
 {% block content %}
 <div style="text-align: center; margin-bottom: 40px;">
   <h1>✨ Popular Recipes</h1>
-  <p style="color: var(--text-secondary); font-size: 1.2rem; margin-top: 10px;">Discover our most loved and trending recipes!</p>
+  <p style="color: var(--text-secondary); font-size: 1.2rem; margin-top: 10px;">Discover delicious recipes from our community!</p>
 </div>
 
 {% if recipes %}
@@ -52,7 +52,7 @@
 
     {% if recipe.author %}
       <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-        👨‍🍳 Curated by <strong style="color: var(--primary-color);">{{ recipe.author.username }}</strong>
+        👨‍🍳 Created by <strong style="color: var(--primary-color);">{{ recipe.author.username }}</strong>
       </p>
     {% endif %}
   </div>
@@ -60,11 +60,17 @@
 {% else %}
   <div class="recipe-card" style="text-align: center; padding: 60px 30px;">
     <i class="fas fa-star" style="font-size: 4rem; color: var(--text-muted); margin-bottom: 20px; opacity: 0.3;"></i>
-    <h2 style="margin-bottom: 20px;">✨ No popular recipes yet</h2>
-    <p style="font-size: 1.1rem; margin-bottom: 30px;">Check back soon for featured recipes from our community!</p>
-    <a href="{% url 'recipe_list' %}" class="btn" style="width: auto; display: inline-block; padding: 14px 30px;">
-      📖 Browse All Recipes
-    </a>
+    <h2 style="margin-bottom: 20px;">✨ No recipes available yet</h2>
+    <p style="font-size: 1.1rem; margin-bottom: 30px;">Be the first to share a recipe with the community!</p>
+    {% if user.is_authenticated %}
+      <a href="{% url 'add_recipe' %}" class="btn" style="width: auto; display: inline-block; padding: 14px 30px;">
+        ➕ Add Your First Recipe
+      </a>
+    {% else %}
+      <a href="{% url 'register' %}" class="btn" style="width: auto; display: inline-block; padding: 14px 30px;">
+        ✨ Join to Add Recipes
+      </a>
+    {% endif %}
   </div>
 {% endif %}
 
