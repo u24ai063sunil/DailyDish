@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% block title %}Recommended for You - DailyDish{% endblock %}
+
+{% block content %}
+<div style="max-width: 1200px; margin: 0 auto;">
+  
+  <!-- Hero Section -->
+  <div style="text-align: center; margin-bottom: 50px;">
+    <h1 style="font-size: 3rem; margin-bottom: 15px;">
+      <i class="fas fa-magic" style="color: var(--primary-color);"></i> Recommended for You
+    </h1>
+    <p style="color: var(--text-muted); font-size: 1.2rem;">
+      AI-powered recipe suggestions based on your preferences
+    </p>
+  </div>
+
+  {% if recommendations %}
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; margin-bottom: 50px;">
+      {% for recipe in recommendations %}
+        <div class="recipe-card" style="display: flex; flex-direction: column; position: relative; overflow: hidden;">
+          
+          <!-- AI Badge -->
+          <div style="position: absolute; top: 15px; right: 15px; background: linear-gradient(135deg, var(--primary-color), var(--primary-hover)); color: #000; padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; z-index: 10; box-shadow: 0 4px 12px rgba(0, 255, 200, 0.4);">
+            <i class="fas fa-robot"></i> AI Pick
+          </div>
+
+          <div style="flex: 1;">
+            <h3 style="margin-bottom: 10px; padding-right: 80px;">
+              <a href="#" style="color: var(--primary-color); text-decoration: none;">{{ recipe.title }}</a>
+            </h3>
+            
+            <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
+              <span class="badge" style="background: var(--primary-color); color: #000;">{{ recipe.category }}</span>
+              <span class="badge badge-{{ recipe.difficulty|lower }}">{{ recipe.difficulty }}</span>
+              {% if recipe.is_vegan %}
+                <span class="badge badge-vegan">Vegan</span>
+              {% elif recipe.is_vegetarian %}
+                <span class="badge badge-veg">Vegetarian</span>
+              {% endif %}
+              {% if recipe.cuisine %}
+                <span class="badge" style="background: rgba(255, 255, 255, 0.1); color: var(--text-primary);">{{ recipe.cuisine }}</span>
+              {% endif %}
+            </div>
+
+            {% if recipe.description %}
+              <p style="color: var(--text-secondary); margin-bottom: 15px; line-height: 1.6;">
+                {{ recipe.description|truncatewords:25 }}
+              </p>
+            {% endif %}
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 15px;">
+              <div style="background: rgba(255, 255, 255, 0.03); padding: 12px; border-radius: 8px; text-align: center;">
+                <i class="fas fa-clock" style="color: var(--primary-color); margin-bottom: 5px;"></i>
+                <div style="font-size: 0.85rem; color: var(--text-muted);">Prep Time</div>
+                <div style="font-weight: 700; color: var(--text-primary);">{{ recipe.prep_time }}min</div>
+              </div>
+              <div style="background: rgba(255, 255, 255, 0.03); padding: 12px; border-radius: 8px; text-align: center;">
+                <i class="fas fa-fire" style="color: var(--secondary-color); margin-bottom: 5px;"></i>
+                <div style="font-size: 0.85rem; color: var(--text-muted);">Cook Time</div>
+                <div style="font-weight: 700; color: var(--text-primary);">{{ recipe.cook_time }}min</div>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 15px; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">
+              <span><i class="fas fa-users" style="color: var(--accent-color);"></i> Serves {{ recipe.servings }}</span>
+              <span><i class="fas fa-user" style="color: var(--primary-color);"></i> By {{ recipe.author.username }}</span>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: auto;">
+            <a href="#" style="flex: 1; padding: 12px; background: linear-gradient(135deg, var(--primary-color), var(--primary-hover)); color: #000; border-radius: 8px; text-decoration: none; font-weight: 700; text-align: center; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(0, 255, 200, 0.3); transition: all 0.3s ease;">
+              View Recipe
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Why These Recommendations -->
+    <div class="recipe-card" style="background: linear-gradient(135deg, rgba(0, 255, 200, 0.05), rgba(255, 107, 157, 0.05)); border: 1px solid rgba(0, 255, 200, 0.2);">
+      <h3 style="color: var(--primary-color); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+        <i class="fas fa-info-circle"></i> How We Choose These Recipes
+      </h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+        <div style="display: flex; gap: 15px; align-items: start;">
+          <i class="fas fa-brain" style="font-size: 1.5rem; color: var(--primary-color);"></i>
+          <div>
+            <h4 style="color: var(--text-primary); margin-bottom: 8px;">Your Preferences</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Based on cuisines and categories you've cooked before</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 15px; align-items: start;">
+          <i class="fas fa-leaf" style="font-size: 1.5rem; color: var(--success);"></i>
+          <div>
+            <h4 style="color: var(--text-primary); margin-bottom: 8px;">Dietary Habits</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Matches your vegetarian or vegan preferences</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 15px; align-items: start;">
+          <i class="fas fa-chart-line" style="font-size: 1.5rem; color: var(--secondary-color);"></i>
+          <div>
+            <h4 style="color: var(--text-primary); margin-bottom: 8px;">Difficulty Level</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Suggests recipes matching your cooking skill</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  {% else %}
+    <div class="recipe-card" style="text-align: center; padding: 60px 30px;">
+      <i class="fas fa-robot" style="font-size: 4rem; color: var(--text-muted); margin-bottom: 20px; opacity: 0.3;"></i>
+      <h3 style="color: var(--text-muted); margin-bottom: 15px;">Start Cooking to Get Recommendations</h3>
+      <p style="color: var(--text-muted); margin-bottom: 25px;">Add a few recipes to help our AI understand your preferences!</p>
+      <a href="{% url 'add_recipe' %}" style="display: inline-block; padding: 14px 28px; background: linear-gradient(135deg, var(--primary-color), var(--primary-hover)); color: #000; border-radius: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; box-shadow: 0 4px 15px rgba(0, 255, 200, 0.3);">
+        ➕ Add Your First Recipe
+      </a>
+    </div>
+  {% endif %}
+
+  <!-- Explore More -->
+  <div style="text-align: center; margin-top: 50px;">
+    <h3 style="color: var(--primary-color); margin-bottom: 20px;">Want More Options?</h3>
+    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+      <a href="{% url 'recipe_list' %}" style="padding: 12px 24px; background: rgba(0, 255, 200, 0.1); color: var(--primary-color); border: 2px solid var(--primary-color); border-radius: 8px; text-decoration: none; font-weight: 600;">
+        📖 Browse All Recipes
+      </a>
+      <a href="{% url 'popular_recipes' %}" style="padding: 12px 24px; background: rgba(255, 107, 157, 0.1); color: var(--secondary-color); border: 2px solid var(--secondary-color); border-radius: 8px; text-decoration: none; font-weight: 600;">
+        ✨ Popular Recipes
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  @media (max-width: 768px) {
+    .recipe-card[style*="grid-template-columns"] {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
+{% endblock %}

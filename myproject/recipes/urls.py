@@ -19,4 +19,5 @@ urlpatterns = [
     
     # Static Pages
     path('about/', views.about_view, name='about'),
+    path('recommendations/', views.recommendations_view, name='recommendations'),
 ]

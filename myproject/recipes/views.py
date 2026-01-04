@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.db.models import Q
 from .models import Recipe, UserProfile
 from .forms import RegisterForm, LoginForm, UserProfileForm, UserUpdateForm
+from .recommendation import RecipeRecommender
 
 
 # Authentication Views
@@ -118,7 +119,18 @@ def popular_recipes(request):
     else:
         # For non-authenticated users, show latest 6 recipes
         recipes = Recipe.objects.all()[:6]
-    return render(request, 'popular_recipes.html', {'recipes': recipes})
+    
+    # Get AI recommendations for authenticated users
+    recommendations = []
+    if request.user.is_authenticated:
+        recommender = RecipeRecommender()
+        recommendations = recommender.get_personalized_recommendations(request.user, num_recommendations=6)
+    
+    context = {
+        'recipes': recipes,
+        'recommendations': recommendations,
+    }
+    return render(request, 'popular_recipes.html', context)
 
 
 @login_required
@@ -269,3 +281,15 @@ def edit_recipe(request, pk):
 # About Page
 def about_view(request):
     return render(request, 'about.html')
+
+
+# AI Recommendations Page
+@login_required
+def recommendations_view(request):
+    recommender = RecipeRecommender()
+    recommendations = recommender.get_personalized_recommendations(request.user, num_recommendations=12)
+    
+    context = {
+        'recommendations': recommendations,
+    }
+    return render(request, 'recommendations.html', context)
