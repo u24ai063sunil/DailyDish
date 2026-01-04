@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import re
 
 class Recipe(models.Model):
     CATEGORY_CHOICES = [
@@ -29,6 +30,7 @@ class Recipe(models.Model):
     cuisine = models.CharField(max_length=100, blank=True, null=True)
     is_vegetarian = models.BooleanField(default=False)
     is_vegan = models.BooleanField(default=False)
+    video_url = models.URLField(max_length=500, blank=True, null=True, help_text="YouTube video URL")
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipes', null=True, blank=True)
@@ -39,6 +41,26 @@ class Recipe(models.Model):
     @property
     def total_time(self):
         return self.prep_time + self.cook_time
+    
+    def get_youtube_embed_url(self):
+        """Extract YouTube video ID and return embed URL"""
+        if not self.video_url:
+            return None
+        
+        # Extract video ID from various YouTube URL formats
+        patterns = [
+            r'(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)',
+            r'(?:https?:\/\/)?(?:www\.)?youtu\.be\/([a-zA-Z0-9_-]+)',
+            r'(?:https?:\/\/)?(?:www\.)?youtube\.com\/embed\/([a-zA-Z0-9_-]+)',
+        ]
+        
+        for pattern in patterns:
+            match = re.search(pattern, self.video_url)
+            if match:
+                video_id = match.group(1)
+                return f'https://www.youtube.com/embed/{video_id}'
+        
+        return None
     
     class Meta:
         ordering = ['-created_at']

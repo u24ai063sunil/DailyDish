@@ -232,6 +232,40 @@ def recipes_by_category(request, category):
     return render(request, 'recipes_by_category.html', context)
 
 
+@login_required
+def edit_recipe(request, pk):
+    recipe = get_object_or_404(Recipe, pk=pk)
+    
+    # Only allow editing if user is the recipe author or admin
+    if recipe.author != request.user and not request.user.is_staff:
+        messages.error(request, 'You do not have permission to edit this recipe.')
+        return redirect('profile')
+    
+    if request.method == 'POST':
+        recipe.title = request.POST.get('title')
+        recipe.category = request.POST.get('category')
+        recipe.difficulty = request.POST.get('difficulty', 'Medium')
+        recipe.prep_time = request.POST.get('prep_time')
+        recipe.cook_time = request.POST.get('cook_time')
+        recipe.servings = request.POST.get('servings', 4)
+        recipe.ingredients = request.POST.get('ingredients')
+        recipe.instructions = request.POST.get('instructions')
+        recipe.description = request.POST.get('description', '')
+        recipe.cuisine = request.POST.get('cuisine', '')
+        recipe.video_url = request.POST.get('video_url', '') or None
+        recipe.is_vegetarian = request.POST.get('is_vegetarian') == 'on'
+        recipe.is_vegan = request.POST.get('is_vegan') == 'on'
+        
+        recipe.save()
+        messages.success(request, 'Recipe updated successfully!')
+        return redirect('profile')
+    
+    context = {
+        'recipe': recipe,
+    }
+    return render(request, 'edit_recipe.html', context)
+
+
 # About Page
 def about_view(request):
     return render(request, 'about.html')

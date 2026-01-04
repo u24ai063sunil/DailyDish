@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block title %}Edit Recipe - DailyDish{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+  <h1 style="margin-bottom: 10px;">✏️ Edit Recipe</h1>
+  <p style="color: var(--text-muted); margin-bottom: 40px; font-size: 1.1rem;">Update your recipe details below</p>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div style="padding: 15px; border-radius: 8px; margin-bottom: 20px; background: {% if message.tags == 'error' %}rgba(248, 113, 113, 0.1); border: 1px solid #f87171;{% else %}rgba(74, 222, 128, 0.1); border: 1px solid #4ade80;{% endif %}">
+        <p style="margin: 0; color: {% if message.tags == 'error' %}#f87171{% else %}#4ade80{% endif %};">{{ message }}</p>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="recipe-card">
+    <form method="post">
+      {% csrf_token %}
+      
+      <h3 style="color: var(--primary-color); margin-bottom: 20px;">Basic Information</h3>
+      
+      <label for="title">Recipe Title *</label>
+      <input type="text" id="title" name="title" placeholder="e.g., Chocolate Chip Cookies" value="{{ recipe.title }}" required>
+
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="3" placeholder="Brief description of your recipe...">{{ recipe.description }}</textarea>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div>
+          <label for="category">Category *</label>
+          <select id="category" name="category" required>
+            <option value="">Select Category</option>
+            <option value="Breakfast" {% if recipe.category == 'Breakfast' %}selected{% endif %}>🌅 Breakfast</option>
+            <option value="Lunch" {% if recipe.category == 'Lunch' %}selected{% endif %}>🍱 Lunch</option>
+            <option value="Dinner" {% if recipe.category == 'Dinner' %}selected{% endif %}>🍽️ Dinner</option>
+            <option value="Dessert" {% if recipe.category == 'Dessert' %}selected{% endif %}>🍰 Dessert</option>
+            <option value="Snacks" {% if recipe.category == 'Snacks' %}selected{% endif %}>🍿 Snacks</option>
+            <option value="Drinks" {% if recipe.category == 'Drinks' %}selected{% endif %}>🥤 Drinks</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="difficulty">Difficulty *</label>
+          <select id="difficulty" name="difficulty" required>
+            <option value="Easy" {% if recipe.difficulty == 'Easy' %}selected{% endif %}>Easy</option>
+            <option value="Medium" {% if recipe.difficulty == 'Medium' %}selected{% endif %}>Medium</option>
+            <option value="Hard" {% if recipe.difficulty == 'Hard' %}selected{% endif %}>Hard</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+        <div>
+          <label for="prep_time">Prep Time (mins) *</label>
+          <input type="number" id="prep_time" name="prep_time" min="0" placeholder="15" value="{{ recipe.prep_time }}" required>
+        </div>
+
+        <div>
+          <label for="cook_time">Cook Time (mins) *</label>
+          <input type="number" id="cook_time" name="cook_time" min="0" placeholder="30" value="{{ recipe.cook_time }}" required>
+        </div>
+
+        <div>
+          <label for="servings">Servings *</label>
+          <input type="number" id="servings" name="servings" min="1" placeholder="4" value="{{ recipe.servings }}" required>
+        </div>
+      </div>
+
+      <label for="cuisine">Cuisine Type</label>
+      <input type="text" id="cuisine" name="cuisine" placeholder="e.g., Italian, Indian, Chinese" value="{{ recipe.cuisine }}">
+
+      <hr style="border: none; height: 1px; background: rgba(255, 255, 255, 0.1); margin: 30px 0;">
+
+      <h3 style="color: var(--primary-color); margin-bottom: 20px;">Recipe Details</h3>
+
+      <label for="ingredients">Ingredients *</label>
+      <textarea id="ingredients" name="ingredients" rows="8" placeholder="List all ingredients, one per line:
+- 2 cups all-purpose flour
+- 1 cup sugar
+- 1/2 cup butter" required>{{ recipe.ingredients }}</textarea>
+
+      <label for="instructions">Instructions *</label>
+      <textarea id="instructions" name="instructions" rows="10" placeholder="Write step-by-step instructions:
+1. Preheat oven to 350°F
+2. Mix dry ingredients
+3. Add wet ingredients..." required>{{ recipe.instructions }}</textarea>
+
+      <label for="video_url">YouTube Video URL (Optional)</label>
+      <input type="url" id="video_url" name="video_url" placeholder="https://www.youtube.com/watch?v=..." value="{{ recipe.video_url }}">
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: -15px; margin-bottom: 20px;">
+        <i class="fas fa-info-circle"></i> Add a YouTube video to help others follow your recipe
+      </p>
+
+      <hr style="border: none; height: 1px; background: rgba(255, 255, 255, 0.1); margin: 30px 0;">
+
+      <h3 style="color: var(--primary-color); margin-bottom: 20px;">Dietary Information</h3>
+
+      <div style="display: flex; gap: 30px; margin-bottom: 30px;">
+        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+          <input type="checkbox" id="is_vegetarian" name="is_vegetarian" {% if recipe.is_vegetarian %}checked{% endif %} style="width: auto; margin: 0; cursor: pointer;">
+          <span>🌱 Vegetarian</span>
+        </label>
+
+        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+          <input type="checkbox" id="is_vegan" name="is_vegan" {% if recipe.is_vegan %}checked{% endif %} style="width: auto; margin: 0; cursor: pointer;">
+          <span>🌿 Vegan</span>
+        </label>
+      </div>
+
+      <div style="display: flex; gap: 15px; margin-top: 30px;">
+        <button type="submit" style="flex: 1;">💾 Update Recipe</button>
+        <a href="{% url 'profile' %}" style="flex: 1; display: flex; align-items: center; justify-content: center; background: #555; color: white; text-decoration: none; padding: 14px; border-radius: 10px; font-weight: 700; text-transform: uppercase;">
+          Cancel
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primary-color);
+  }
+</style>
+{% endblock %}
